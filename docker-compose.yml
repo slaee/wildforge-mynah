@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  backend:
+    build: ./wildforge-api
+    image: wildforge-api
+    container_name: wildforge-api
+    ports:
+      - 8000:8000
+  
+  # frontend:
+  #   build: ./wildforge-app
+  #   image: wildforge-app
+  #   container_name: wildforge-app
+  #   ports:
+  #     - 3000:3000
+  #   env_file:
+  #     - ./env/frontend.env
+  #   volumes:
+  #     - ./wildforge-app/src:/app/src
+  #   depends_on:
+  #     - backend
+
+
+networks:
+  wildforge-network:
+    driver: bridge
