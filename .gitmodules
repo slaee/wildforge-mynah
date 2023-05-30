@@ -1,0 +1,6 @@
+[submodule "wildforge-api"]
+	path = wildforge-api
+	url = git@github.com:slaee/wildforge-api.git
+[submodule "wildforge-app"]
+	path = wildforge-app
+	url = git@github.com:slaee/wildforge-app.git
