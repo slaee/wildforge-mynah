@@ -1,13 +1,37 @@
+# This is the docker compose file for the project
+
 version: "3.8"
 services:
-  mysqlserver:
+  mysql:
     build: ./wildforge-api/mysql
     image: mysql
     container_name: wildforge-db
     ports:
       - 3306:3306
     env_file:
-      - ./env/mysql.env
+      - ./wildforge-api/env/mysql.env
+    networks:
+      - wildforge-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - mysql
+    environment:
+      PMA_HOST: wildforge-db
+      PMA_PORT: 3306
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+    ports:
+      - "8088:80"
     networks:
       - wildforge-network
 
@@ -15,29 +39,36 @@ services:
     build: ./wildforge-api
     image: wildforge-api
     container_name: wildforge-api
+    links:
+      - mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
     ports:
       - 8000:8000
     env_file:
-      - ./env/backend.env
+      - ./wildforge-api/env/backend.env
     networks:
       - wildforge-network
-    depends_on:
-      - mysqlserver
     
-  
-  # frontend:
-  #   build: ./wildforge-app
-  #   image: wildforge-app
-  #   container_name: wildforge-app
-  #   ports:
-  #     - 3000:3000
-  #   env_file:
-  #     - ./env/frontend.env
-  #   volumes:
-  #     - ./wildforge-app/src:/app/src
-  #   depends_on:
-  #     - backend
-
+    
+  frontend:
+    build: ./wildforge-app
+    image: wildforge-app
+    container_name: wildforge-app
+    links:
+      - backend
+    ports:
+      - 3000:3000
+    env_file:
+      - ./wildforge-app/frontend.env
+    volumes:
+      - ./wildforge-app/src:/app/src
+    depends_on:
+      - backend
+    networks:
+      - wildforge-network
 
 networks:
   wildforge-network:

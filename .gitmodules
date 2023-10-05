@@ -1,6 +1,8 @@
 [submodule "wildforge-api"]
 	path = wildforge-api
 	url = git@github.com:slaee/wildforge-api.git
+	branch = dev
 [submodule "wildforge-app"]
 	path = wildforge-app
 	url = git@github.com:slaee/wildforge-app.git
+	branch = dev
