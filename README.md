@@ -1,6 +1,6 @@
 # Pulling the project 
 ```bash
-$ git pull git@github.com:slaee/wildforge-mynah.git
+$ git clone git@github.com:slaee/wildforge-mynah.git
 $ git submdoule update --remote
 ```
 
