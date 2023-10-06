@@ -1,11 +1,13 @@
 # Pulling the project 
 ```bash
 $ git clone git@github.com:slaee/wildforge-mynah.git
+$ cd wildforge-mynah
+$ git submodule init
 $ git submodule update --remote
 ```
 
 # Development 
-Update the `wildforge-api/backend/wildforge/settings.py` under Database configuration with this code 
+Update the `wildforge-api/backend/wildforge/settings.py` under Database configuration with this code or just uncomment
 ```python
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
