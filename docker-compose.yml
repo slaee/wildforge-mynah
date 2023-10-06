@@ -3,7 +3,9 @@
 version: "3.8"
 services:
   mysql:
-    build: ./wildforge-api/mysql
+    build: 
+      context: ./wildforge-api/mysql
+      dockerfile: Dockerfile
     image: mysql
     container_name: wildforge-db
     ports:
@@ -16,7 +18,7 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 1s
       timeout: 5s
-      retries: 10
+      retries: 5
 
   phpmyadmin:
     image: phpmyadmin
@@ -36,7 +38,9 @@ services:
       - wildforge-network
 
   backend:
-    build: ./wildforge-api
+    build: 
+      context: ./wildforge-api
+      dockerfile: Dockerfile
     image: wildforge-api
     container_name: wildforge-api
     links:
@@ -52,9 +56,10 @@ services:
     networks:
       - wildforge-network
     
-    
   frontend:
-    build: ./wildforge-app
+    build: 
+      context: ./wildforge-app
+      dockerfile: Dockerfile
     image: wildforge-app
     container_name: wildforge-app
     links:
