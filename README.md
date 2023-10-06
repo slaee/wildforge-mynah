@@ -1,7 +1,7 @@
 # Pulling the project 
 ```bash
 $ git clone git@github.com:slaee/wildforge-mynah.git
-$ git submdoule update --remote
+$ git submodule update --remote
 ```
 
 # Development 
