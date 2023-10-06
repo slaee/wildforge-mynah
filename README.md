@@ -36,5 +36,5 @@ $ docker-compose up --build -d
 To stop the docker-compose and cleaning up volumes to save space:
 ```bash
 $ docker-compose down
-$ sudo docker volume rm $(sudo docker volume ls -q)
+$ docker volume rm $(docker volume ls -q)
 ```
