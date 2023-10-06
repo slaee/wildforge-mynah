@@ -11,7 +11,7 @@ services:
     ports:
       - 3306:3306
     env_file:
-      - ./wildforge-api/env/mysql.env
+      - ./env/mysql.env
     networks:
       - wildforge-network
     healthcheck:
@@ -52,7 +52,7 @@ services:
     ports:
       - 8000:8000
     env_file:
-      - ./wildforge-api/env/backend.env
+      - ./env/backend.env
     networks:
       - wildforge-network
     
@@ -67,7 +67,7 @@ services:
     ports:
       - 3000:3000
     env_file:
-      - ./wildforge-app/frontend.env
+      - ./env/frontend.env
     volumes:
       - ./wildforge-app/src:/app/src
     depends_on:
